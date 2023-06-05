@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Payapaya</title>
+  <style>
+    body {
+      padding: 20px;
+      background: linear-gradient(to right, #0079FF, #00DFA2, #F6FA70, #FF0060);
+      background-size: 1200% 100%;
+      animation: rainbow 10s linear infinite;
+    }
+
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .center-content {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #8DCBE6;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .input-label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="number"] {
+      display: block;
+      margin-bottom: 10px;
+      padding: 8px;
+      width: 100%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-right: 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: #4caf50;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #resetButton {
+      background-color: #FC2947;
+    }
+
+    #result {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .input-error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="center-content">
+    <h1>Sum of Numbers in Range</h1>
+
+    <label for="startInput" class="input-label">Enter the starting number:</label>
+    <input type="number" id="startInput" placeholder="Enter the starting number">
+
+    <label for="endInput" class="input-label">Enter the ending number:</label>
+    <input type="number" id="endInput" placeholder="Enter the ending number">
+
+    <button onclick="calculateSum()">Calculate✅</button>
+    <button id="resetButton" onclick="resetForm()">Clear❌</button>
+
+    <p id="result"></p>
+  </div>
+
+  <script>
+    function calculateSum() {
+      var startInput = document.getElementById('startInput');
+      var endInput = document.getElementById('endInput');
+      var result = document.getElementById('result');
+      var startingNumber = parseInt(startInput.value);
+      var endingNumber = parseInt(endInput.value);
+      var sum = 0;
+      var numbersAdded = "";
+
+      if (Number.isNaN(startingNumber) || Number.isNaN(endingNumber) || startingNumber > endingNumber) {
+        result.textContent = "Invalid input! Please enter valid numbers.";
+        result.classList.add("input-error");
+      } else {
+        for (var i = startingNumber; i <= endingNumber; i++) {
+          sum += i;
+          numbersAdded += i + ", ";
+        }
+        numbersAdded = numbersAdded.slice(0, -2);
+
+        result.textContent = "Numbers added: " + numbersAdded + "\n";
+        result.textContent += "The sum of all numbers in the range is: " + sum;
+
+        result.classList.remove("input-error");
+      }
+    }
+
+    function resetForm() {
+      var startInput = document.getElementById('startInput');
+      var endInput = document.getElementById('endInput');
+      var result = document.getElementById('result');
+
+      startInput.value = '';
+      endInput.value = '';
+      result.textContent = '';
+
+      result.classList.remove("input-error");
+    }
+  </script>
+</body>
+</html>
